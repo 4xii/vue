@@ -2,7 +2,7 @@
  * @Author: 朱世新
  * @Date: 2021-02-28 23:04:20
  * @LastEditors: 朱世新
- * @LastEditTime: 2021-03-01 18:13:16
+ * @LastEditTime: 2021-03-01 18:13:49
  * @Description: 
 -->
 <template>
@@ -45,6 +45,5 @@ export default {
   .title{
     font-weight:850;
     line-height: 1.5rem;
-    
   }
 </style>
