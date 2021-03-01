@@ -1,4 +1,4 @@
-# demo-1
+# news
 
 ## Project setup
 ```
