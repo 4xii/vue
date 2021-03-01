@@ -14,23 +14,23 @@ import Detail from './pages/detail'
 Vue.use(Router);
 
 export default new Router({
-  routes:[
-    { 
-      path:'/',
-			name:'home',
-			component:Home,
-			redirect:'/list',
-      
-      children:[
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home,
+      redirect: '/list',
+
+      children: [
         {
-          path:'/list',
-          name:'list',
-          component:List,
+          path: '/list',
+          name: 'list',
+          component: List,
         },
         {
-          path:'/detail',
-          name:'detail',
-          component:Detail
+          path: '/detail',
+          name: 'detail',
+          component: Detail
         }
       ]
     }

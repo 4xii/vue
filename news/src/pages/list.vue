@@ -2,18 +2,23 @@
  * @Author: 朱世新
  * @Date: 2021-02-28 22:42:29
  * @LastEditors: 朱世新
- * @LastEditTime: 2021-03-01 16:56:43
+ * @LastEditTime: 2021-03-01 18:17:06
  * @Description: 
 -->
 <template>
   <div class="list">
-    <div @click="goNews(item.post_id)" class="news" v-for="(item,index) in newList" :key="index">
+    <div
+      @click="goNews(item.post_id)"
+      class="news"
+      v-for="(item, index) in newList"
+      :key="index"
+    >
       <div class="new-img-wrapper">
         <img class="new-img" :src="item.author_avatar" />
       </div>
       <div class="new-info">
-        <p class="new-title">{{item.title}}</p>
-        <p class="new-time">{{item.created_at}}</p>
+        <p class="new-title">{{ item.title }}</p>
+        <p class="new-time">{{ item.created_at }}</p>
       </div>
     </div>
   </div>
@@ -23,28 +28,28 @@ export default {
   name: "list",
   data() {
     return {
-      newList:[]
+      newList: [],
     };
   },
-  mounted(){
+  mounted() {
     this.getNewList();
   },
   methods: {
     getNewList() {
       fetch("https://unidemo.dcloud.net.cn/api/news")
-      .then((response) => response.json())
-      .then((res) => {
-        this.newList = res;
-      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.newList = res;
+        });
     },
-    goNews(newsID){
+    goNews(newsID) {
       this.$router.push({
-        path:'/detail',
-        query:{
-          newsID
-        }
-      })
-    }
+        path: "/detail",
+        query: {
+          newsID,
+        },
+      });
+    },
   },
 };
 </script>
@@ -57,8 +62,8 @@ export default {
   .news {
     width: 100%;
     display: flex;
-    border-bottom:1px solid #e0e0e0;
-    padding:0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5rem 0;
     .new-img-wrapper {
       height: 3.5rem;
       width: 3.5rem;
@@ -79,7 +84,7 @@ export default {
 
       .new-title {
         font-family: "黑体";
-        line-height:1.8rem;
+        line-height: 1.8rem;
         font-size: 1.2rem;
         font-weight: 100;
       }

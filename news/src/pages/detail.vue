@@ -14,36 +14,36 @@
 <script>
 //import { Editor, EditorContent } from 'tiptap';
 export default {
-  name:'detail',
+  name: "detail",
   components: {
     //EditorContent,
   },
   data() {
     return {
-      newsID:this.$route.query.newsID,
-      newsTitle:'',
-      newsContent:'',
-      editor: null,   
+      newsID: this.$route.query.newsID,
+      newsTitle: "",
+      newsContent: "",
+      editor: null,
     };
   },
-  mounted(){
+  mounted() {
     this.getContent();
   },
   methods: {
     getContent() {
       fetch(`https://unidemo.dcloud.net.cn/api/news/36kr/${this.newsID}`)
-      .then((response) => response.json())
-      .then((res) => {
-        this.newsTitle = res.title;
-        this.newsContent = res.content;
-      })
+        .then((response) => response.json())
+        .then((res) => {
+          this.newsTitle = res.title;
+          this.newsContent = res.content;
+        });
     },
   },
-}
+};
 </script>
 <style lang="scss">
-  .title{
-    font-weight:850;
-    line-height: 1.5rem;
-  }
+.title {
+  font-weight: 850;
+  line-height: 1.5rem;
+}
 </style>
