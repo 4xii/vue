@@ -2,7 +2,7 @@
  * @Author: 朱世新
  * @Date: 2021-02-28 22:42:29
  * @LastEditors: 朱世新
- * @LastEditTime: 2021-03-01 18:17:06
+ * @LastEditTime: 2021-06-10 00:32:08
  * @Description: 
 -->
 <template>
@@ -21,18 +21,100 @@
         <p class="new-time">{{ item.created_at }}</p>
       </div>
     </div>
+    <div class="el">
+      <my-eltable
+        ref="mt"
+        @func="getMsgFormSon"
+        id="printTable"
+        :tableData="tableData"
+        :tabheight="tabheight"
+        :tableHeader="tableHeader"
+        :loading="loading"
+        :isshow="isshow"
+      ></my-eltable>
+    </div>
   </div>
 </template>
 <script>
+import MyEltable from "../components/Table/table";
 export default {
   name: "list",
+  components: { MyEltable },
   data() {
     return {
       newList: [],
+      loading: false,
+      isshow: true,
+      tabheight: "100%", // 表格高度，这里是做了自适应高度，正常是需要写固定值的
+      tableHeader: [
+        // 表头
+        { prop: "Name", label: "卡号" },
+        { prop: "LabelType", label: "标签类型" },
+        { prop: "ObjectType", label: "对象类型" },
+        { prop: "ObjectValue", label: "对象值" },
+        {
+          prop: "Enable",
+          label: "是否启用",
+          isok: "1",
+          formatData: function (val) {
+            return val == true ? "启用" : "禁用";
+          },
+        },
+        // 如果后端传过来的值不是我们所预期的，此处可以如下判断修改，isok是是否需要渲染为el-tag,效果为下图
+        {
+          prop: "Protect",
+          label: "是否设防",
+          isok: "1",
+          formatData: function (val) {
+            return val == true ? "设防" : "未设防";
+          },
+        },
+        // 此处为操作栏，不需要可以删除，clickFun绑定此操作按钮的事件
+        {
+          prop: "oper",
+          label: "操作",
+          fixed: "right",
+          minWidth: "160px",
+          width: "160px",
+          oper: [
+            { name: "修改", style: "primary", clickFun: this.handleClick },
+            { name: "删除", style: "danger", clickFun: this.delClick },
+          ],
+        },
+      ],
+      tableData: [
+        //'A0','标签','藏品','A010',true,true3
+        {
+          Name: "A011",
+          LabelType: "对冲",
+          ObjectType: "基金",
+          iObjectValue: "A0112",
+          Enable: '启用',
+          Protect: '设防',
+        },
+        {
+          Name: "A011",
+          LabelType: "对冲",
+          ObjectType: "基金",
+          iObjectValue: "A0112",
+          Enable: '启用',
+          Protect: '设防',
+        },
+        {
+          Name: "A011",
+          LabelType: "对冲",
+          ObjectType: "基金",
+          iObjectValue: "A0112",
+          Enable: '启用',
+          Protect: '设防',
+        },
+      ],
     };
   },
+
   mounted() {
     this.getNewList();
+    this.formatData(this.isshow);
   },
   methods: {
     getNewList() {
@@ -93,6 +175,12 @@ export default {
         color: #8e8e8e;
       }
     }
+  }
+  .el {
+    display: block;
+    width: 100%;
+    height: 700px;
+    background-color: sandybrown;
   }
 }
 </style>
